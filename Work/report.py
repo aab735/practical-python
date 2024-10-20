@@ -20,7 +20,7 @@ def read_portfolio(filename):
     return portfolio'''
 
 def read_prices(filename):
-    with opne(filename) as lines:
+    with open(filename) as lines:
         return dict(fileparse.parse_csv(lines,types=[str,float],has_headers=False))
 
     '''stock_price = {}

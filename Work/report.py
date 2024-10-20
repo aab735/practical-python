@@ -2,9 +2,13 @@
 #
 # Exercise 2.4
 import csv
+import fileparse
 
 def read_portfolio(filename):
-    portfolio = []
+    with open(filename) as lines:
+        return fileparse.parse_csv(lines,select=['name','shares','price'],types=[str,int,float])
+
+    '''portfolio = []
 
     with open(filename, 'rt') as f:
         rows=csv.reader(f)
@@ -13,10 +17,13 @@ def read_portfolio(filename):
             record = dict(zip(headers,row))
             stock = {'name':record['name'],'shares':int(record['shares']),'price':float(record['price'])}
             portfolio.append(stock)
-    return portfolio
+    return portfolio'''
 
 def read_prices(filename):
-    stock_price = {}
+    with opne(filename) as lines:
+        return dict(fileparse.parse_csv(lines,types=[str,float],has_headers=False))
+
+    '''stock_price = {}
 
     with open(filename, 'rt') as f:
         rows=csv.reader(f)
@@ -25,7 +32,7 @@ def read_prices(filename):
                 stock_price[row[0]]=float(row[1])
             except IndexError:
                 pass
-    return stock_price
+    return stock_price'''
 
 def gain_or_loss():
     cost_value=0.0
@@ -56,3 +63,12 @@ def portfolio_report(portfolio_filename,prices_filename):
     print(('-'*10+' ')*len(headers))
     for row in report:
         print('%10s %10d %10.2f %10.2f' % row)
+
+def main(args):
+    if len(args)!=3:
+        raise SystemExit('Usage: %s portfile pricefile' % args[0])
+    portfolio_report(args[1],args[2])
+
+if __name__ == '__main__':
+    import sys
+    main(sys.argv)

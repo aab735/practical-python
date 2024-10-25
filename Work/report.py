@@ -3,10 +3,12 @@
 # Exercise 2.4
 import csv
 import fileparse
+import stock
 
 def read_portfolio(filename):
     with open(filename) as lines:
-        return fileparse.parse_csv(lines,select=['name','shares','price'],types=[str,int,float])
+        portdicts = fileparse.parse_csv(lines,select=['name','shares','price'],types=[str,int,float])
+    return [stock.Stock(d['name'],d['shares'],d['price']) for d in portdicts]
 
     '''portfolio = []
 
@@ -50,8 +52,8 @@ def gain_or_loss():
 def make_report(portfolioList,priceDict):
     report = []
     for row in portfolioList:
-        profit_or_loss = priceDict[row['name']] - float(row['price'])
-        report.append((row['name'],row['shares'],priceDict[row['name']],profit_or_loss))
+        profit_or_loss = priceDict[row.name] - float(row.price)
+        report.append((row.name,row.shares,priceDict[row.name],profit_or_loss))
     return report
 
 def print_report(reportdata):

@@ -54,15 +54,19 @@ def make_report(portfolioList,priceDict):
         report.append((row['name'],row['shares'],priceDict[row['name']],profit_or_loss))
     return report
 
+def print_report(reportdata):
+    headers=('Name', 'Shares', 'Price', 'Change')
+    print('%10s %10s %10s %10s' %headers)
+    print(('-'*10+' ')*len(headers))
+    for row in reportdata:
+        print('%10s %10d %10.2f %10.2f' % row)
+
 def portfolio_report(portfolio_filename,prices_filename):
     portfolio = read_portfolio(portfolio_filename)
     stock_price = read_prices(prices_filename)
     report=make_report(portfolio,stock_price)
-    headers=('Name', 'Shares', 'Price', 'Change')
-    print('%10s %10s %10s %10s' %headers)
-    print(('-'*10+' ')*len(headers))
-    for row in report:
-        print('%10s %10d %10.2f %10.2f' % row)
+    print_report(report)
+
 
 def main(args):
     if len(args)!=3:

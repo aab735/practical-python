@@ -4,10 +4,11 @@
 import sys
 import csv
 import report
+import portfolio
 
 def portfolio_cost(filename):
     portfolio = report.read_portfolio(filename)
-    return sum([s.shares*s.price for s in portfolio])
+    return portfolio.total_cost
     
 '''
 def portfolio_cost(filename):

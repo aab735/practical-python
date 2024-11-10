@@ -1,5 +1,12 @@
+from typedproperty import typedproperty,String,Integer,Float
+
 class Stock:
-    __slots__ = ('name','_shares','price')
+    #__slots__ = ('name','_shares','price')
+
+    name = String('name')
+    shares = Integer('shares')
+    price = Float('price')
+
     def __init__(self,name,shares,price):
         self.name=name
         self.shares=shares

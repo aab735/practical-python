@@ -3,41 +3,17 @@
 # Exercise 2.4
 import csv
 import fileparse
-import stock
+from stock import Stock
 import tableformat
 from portfolio import Portfolio
 
-def read_portfolio(filename):
+def read_portfolio(filename, **opts):
     with open(filename) as lines:
-        portdicts = fileparse.parse_csv(lines,select=['name','shares','price'],types=[str,int,float])
-    portfolio = [stock.Stock(d['name'],d['shares'],d['price']) for d in portdicts]
-    return Portfolio(portfolio)
-
-    '''portfolio = []
-
-    with open(filename, 'rt') as f:
-        rows=csv.reader(f)
-        headers = next(rows)
-        for row in rows:
-            record = dict(zip(headers,row))
-            stock = {'name':record['name'],'shares':int(record['shares']),'price':float(record['price'])}
-            portfolio.append(stock)
-    return portfolio'''
+        return Portfolio.from_csv(lines, **opts)
 
 def read_prices(filename):
     with open(filename) as lines:
         return dict(fileparse.parse_csv(lines,types=[str,float],has_headers=False))
-
-    '''stock_price = {}
-
-    with open(filename, 'rt') as f:
-        rows=csv.reader(f)
-        for row in rows:
-            try:
-                stock_price[row[0]]=float(row[1])
-            except IndexError:
-                pass
-    return stock_price'''
 
 def gain_or_loss():
     cost_value=0.0
@@ -60,11 +36,6 @@ def make_report(portfolioList,priceDict):
     return report
 
 def print_report(reportdata,formatter):
-    '''headers=('Name', 'Shares', 'Price', 'Change')
-    print('%10s %10s %10s %10s' %headers)
-    print(('-'*10+' ')*len(headers))
-    for row in reportdata:
-        print('%10s %10d %10.2f %10.2f' % row)'''
     formatter.headings(['Name', 'Shares', 'Price', 'Change'])
     for name,shares,price,change in reportdata:
         rowdata = [name, str(shares), f'{price:0.2f}', f'{change:0.2f}']

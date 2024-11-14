@@ -2,10 +2,10 @@
 #
 # Exercise 2.4
 import csv
-import fileparse
-from stock import Stock
-import tableformat
-from portfolio import Portfolio
+import porty.fileparse as fileparse
+from porty.stock import Stock
+import porty.tableformat as tableformat
+from porty.portfolio import Portfolio
 
 def read_portfolio(filename, **opts):
     with open(filename) as lines:

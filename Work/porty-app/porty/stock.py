@@ -1,4 +1,4 @@
-from typedproperty import typedproperty,String,Integer,Float
+from porty.typedproperty import typedproperty,String,Integer,Float
 
 class Stock:
     #__slots__ = ('name','_shares','price')

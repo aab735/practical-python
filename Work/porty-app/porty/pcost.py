@@ -3,8 +3,8 @@
 # Exercise 1.27
 import sys
 import csv
-import report
-import portfolio
+import porty.report as report
+import porty.portfolio as portfolio
 
 def portfolio_cost(filename):
     portfolio = report.read_portfolio(filename)

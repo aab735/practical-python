@@ -1,7 +1,7 @@
 #test_stock.py
 
 import unittest
-import stock
+import porty.stock as stock
 
 class TestStock(unittest.TestCase):
     def test_create(self):
